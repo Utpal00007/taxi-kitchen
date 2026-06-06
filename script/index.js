@@ -13,11 +13,11 @@ const displayCategory = (categories) => {
   for (let cat of categories) {
     const categoryCard = document.createElement("div");
     categoryCard.innerHTML = `
-         <button class="btn btn-block justify-start shadow btn-category">
+         <button class="btn bg-white btn-block justify-start shadow btn-category rounded">
             <img
               src="${cat.categoryImg}"
               alt=""
-              class="w-10"
+              class=" py-2 "
             /> ${cat.categoryName}
           </button>`;
 
