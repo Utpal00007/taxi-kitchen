@@ -8,6 +8,8 @@ const loadCategory = () => {
 
 const loadFoods = (id) => {
   const url = `https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`;
+  document.getElementById("food-container").classList.add("hidden");
+  document.getElementById("loading-spinner").classList.remove("hidden");
 
   const catBtns = document.querySelectorAll(".btn-category");
   catBtns.forEach((btn) => btn.classList.remove("active"));
@@ -28,7 +30,6 @@ const loadFoodDetails = (id) => {
 };
 
 const displayCategory = (categories) => {
-  //   console.log(categories);
   const catContainer = document.getElementById("category-container");
   catContainer.innerHTML = "";
   for (let cat of categories) {
@@ -38,7 +39,7 @@ const displayCategory = (categories) => {
             <img
               src="${cat.categoryImg}"
               alt=""
-              class=" w-10 h-10 object-contain "
+              class="w-10 h-10 object-contain rounded-full"
             /> ${cat.categoryName}
           </button>`;
 
@@ -114,6 +115,8 @@ const displayFoods = (foods) => {
 
     foodContainer.append(foodCard);
   });
+  document.getElementById("food-container").classList.remove("hidden");
+  document.getElementById("loading-spinner").classList.add("hidden");
 };
 
 loadCategory();
