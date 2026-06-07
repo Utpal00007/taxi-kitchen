@@ -1,5 +1,5 @@
 const loadCategory = () => {
-  const uri = " https://taxi-kitchen-api.vercel.app/api/v1/categories";
+  const uri = "https://taxi-kitchen-api.vercel.app/api/v1/categories";
 
   fetch(uri)
     .then((res) => res.json())
@@ -7,7 +7,14 @@ const loadCategory = () => {
 };
 
 const loadFoods = (id) => {
-  const url = ` https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`;
+  const url = `https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`;
+
+  const catBtns = document.querySelectorAll(".btn-category");
+  catBtns.forEach((btn) => btn.classList.remove("active"));
+
+  const currentBtn = document.getElementById(`cat-btn-${id}`);
+  currentBtn.classList.add("active");
+
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayFoods(data.foods));
@@ -27,11 +34,11 @@ const displayCategory = (categories) => {
   for (let cat of categories) {
     const categoryCard = document.createElement("div");
     categoryCard.innerHTML = `
-         <button onclick="loadFoods(${cat.id})" class="btn bg-white btn-block justify-start shadow btn-category rounded">
+         <button id="cat-btn-${cat.id}" onclick="loadFoods(${cat.id})" class="btn bg-white btn-block justify-start shadow btn-category rounded">
             <img
               src="${cat.categoryImg}"
               alt=""
-              class=" py-2 "
+              class=" w-10 h-10 object-contain "
             /> ${cat.categoryName}
           </button>`;
 
