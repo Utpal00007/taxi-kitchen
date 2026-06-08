@@ -193,7 +193,7 @@ const removeCart = (btn) => {
   const foodPrice = Number(item.querySelector(".item-price").innerText);
   cart = cart.filter((item) => item.foodTitle != foodTitle);
   totalPrice = 0;
-  cart.forEach((item) => (totalPrice += item.foodPriceNum));
+  total = cart.forEach((item) => (totalPrice += item.foodPriceNum));
 
   displayCart(cart);
   displayTotal(totalPrice);
