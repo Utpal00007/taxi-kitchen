@@ -131,7 +131,7 @@ const addToCart = (btn) => {
   const foodImg = card.querySelector(".food-img").src;
   const foodPrice = card.querySelector(".food-price").innerText;
   const foodPriceNum = Number(foodPrice);
-  console.log(foodTitle, foodImg, foodPrice);
+
   const selectedItem = {
     foodTitle: foodTitle,
     foodImg: foodImg,
@@ -164,19 +164,19 @@ const displayCart = (cart) => {
             </div>
 
             <div class="flex-1">
-              <h1 class="text-xs font-bold">
-                Roast fennel and aubergine paella
+              <h1 class="text-xs font-bold food-title">
+                 ${item.foodTitle}
               </h1>
 
               <div>
                 <h2 class="text-yellow-600 font-semibold">
-                  <span class="price">${item.foodPriceNum}</span>
+                  <span class="item-price">${item.foodPriceNum}</span>
                   BDT
                 </h2>
               </div>
             </div>
 
-            <div
+            <div onclick="removeCart(this)"
               class="w-6 h-6 flex justify-center items-center bg-red-600 rounded-full absolute -top-1 -right-1 text-white cursor-pointer"
             >
               <i class="fa-solid fa-xmark"></i>
@@ -185,4 +185,16 @@ const displayCart = (cart) => {
 
     cartContainer.append(newItem);
   });
+};
+
+const removeCart = (btn) => {
+  const item = btn.parentNode;
+  const foodTitle = item.querySelector(".food-title").innerText;
+  const foodPrice = Number(item.querySelector(".item-price").innerText);
+  cart = cart.filter((item) => item.foodTitle != foodTitle);
+  totalPrice = 0;
+  cart.forEach((item) => (totalPrice += item.foodPriceNum));
+
+  displayCart(cart);
+  displayTotal(totalPrice);
 };
